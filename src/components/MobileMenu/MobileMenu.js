@@ -10,13 +10,9 @@ import Icon from '../Icon';
 import VisuallyHidden from '../VisuallyHidden';
 
 const MobileMenu = ({ isOpen, onDismiss }) => {
-  if (!isOpen) {
-    return null;
-  }
-
   return (
     <Overlay isOpen={isOpen} onDismiss={onDismiss}>
-      <Content aria-label={'Test title'}>
+      <Content isOpen={isOpen} aria-label={'Test title'}>
         <CloseButton onClick={onDismiss}>
           <VisuallyHidden>Dismiss menu</VisuallyHidden>
           <Icon size={32} id="close" />
@@ -43,6 +39,7 @@ const CloseButton = styled(UnstyledButton)`
   align-self: flex-end;
   width: 32px;
   height: 32px;
+  margin-top: 8px;
 `;
 
 const Nav = styled.nav`
@@ -81,7 +78,8 @@ const Overlay = styled(DialogOverlay)`
 const Content = styled(DialogContent)`
   position: absolute;
   background: white;
-  width: 80%;
+  width: ${(props) => (props.isOpen ? '80%' : '0')};
+  animation: 0.5s width ease-in-out;
   right: 0;
   top: 0;
   bottom: 0;

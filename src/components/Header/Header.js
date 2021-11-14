@@ -22,9 +22,12 @@ const Header = () => {
         <Side>
           <Logo />
         </Side>
+
         <Nav>
           <NavLink href="/sale">Sale</NavLink>
           <NavLink href="/new">New&nbsp;Releases</NavLink>
+          <NavLink href="/men">Men</NavLink>
+          <NavLink href="/men">Men</NavLink>
           <NavLink href="/men">Men</NavLink>
           <NavLink href="/women">Women</NavLink>
           <NavLink href="/kids">Kids</NavLink>
@@ -58,17 +61,17 @@ const MainHeader = styled.div`
   display: flex;
   align-items: baseline;
   padding: 18px 32px;
-  height: 72px;
   border-bottom: 1px solid ${COLORS.gray[300]};
   overflow: auto hidden;
   @media ${QUERIES.tabletAndDown} {
     align-items: center;
+    justify-content: space-between;
   }
 `;
 
 const Nav = styled.nav`
   display: flex;
-  gap: clamp(1rem, 14vw - 6rem, 3rem);
+  gap: clamp(1rem, 10vw - 5.25rem, 3rem);
   margin: 0px 48px;
   @media ${QUERIES.tabletAndDown} {
     display: none;
@@ -78,10 +81,15 @@ const Nav = styled.nav`
 const MobileNav = styled.nav`
   display: none;
   height: 100%;
+  flex-direction: row-reverse;
+
   @media ${QUERIES.tabletAndDown} {
     display: flex;
+    gap: 32px;
+  }
+
+  @media ${QUERIES.mobileAndDown} {
     gap: 16px;
-    flex-direction: row-reverse;
   }
 `;
 
@@ -89,6 +97,10 @@ const MobileNavLink = styled.a``;
 
 const Side = styled.div`
   flex: 1;
+
+  @media ${QUERIES.tabletAndDown} {
+    flex: revert;
+  }
 `;
 
 const NavLink = styled.a`

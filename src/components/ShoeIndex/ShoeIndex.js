@@ -69,7 +69,7 @@ const Header = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  @media ${QUERIES.laptopAndDown} {
+  @media ${QUERIES.phoneAndDown} {
     & > label {
       display: none;
     }
