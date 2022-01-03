@@ -6,6 +6,7 @@ import Logo from '../Logo';
 import SuperHeader from '../SuperHeader';
 import MobileMenu from '../MobileMenu';
 import Icon from '../Icon';
+import { NavItem } from './NavItem';
 
 const Header = () => {
   const [showMobileMenu, setShowMobileMenu] = React.useState(false);
@@ -24,14 +25,14 @@ const Header = () => {
         </Side>
 
         <Nav>
-          <NavLink href="/sale">Sale</NavLink>
-          <NavLink href="/new">New&nbsp;Releases</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/men">Men</NavLink>
-          <NavLink href="/women">Women</NavLink>
-          <NavLink href="/kids">Kids</NavLink>
-          <NavLink href="/collections">Collections</NavLink>
+          <NavItem href="/sale">Sale</NavItem>
+          <NavItem href="/new">New&nbsp;Releases</NavItem>
+          <NavItem href="/men">Men</NavItem>
+          <NavItem href="/men">Men</NavItem>
+          <NavItem href="/men">Men</NavItem>
+          <NavItem href="/women">Women</NavItem>
+          <NavItem href="/kids">Kids</NavItem>
+          <NavItem href="/collections">Collections</NavItem>
         </Nav>
 
         <Side>
@@ -100,18 +101,6 @@ const Side = styled.div`
 
   @media ${QUERIES.tabletAndDown} {
     flex: revert;
-  }
-`;
-
-const NavLink = styled.a`
-  font-size: 1.125rem;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: ${COLORS.gray[900]};
-  font-weight: ${WEIGHTS.medium};
-
-  &:first-of-type {
-    color: ${COLORS.secondary};
   }
 `;
 
