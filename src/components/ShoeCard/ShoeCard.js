@@ -14,40 +14,29 @@ const ShoeCard = ({
   releaseDate,
   numOfColors,
 }) => {
-  // There are 3 variants possible, based on the props:
-  //   - new-release
-  //   - on-sale
-  //   - default
-  //
-  // Any shoe released in the last month will be considered
-  // `new-release`. Any shoe with a `salePrice` will be
-  // on-sale. In theory, it is possible for a shoe to be
-  // both on-sale and new-release, but in this case, `on-sale`
-  // will triumph and be the variant used.
-  // prettier-ignore
-  const variant = typeof salePrice === 'number'
-    ? 'on-sale'
-    : isNewShoe(releaseDate)
+  const variant =
+    typeof salePrice === 'number'
+      ? 'on-sale'
+      : isNewShoe(releaseDate)
       ? 'new-release'
-      : 'default'
+      : 'default';
 
   return (
     <Link href={`/shoe/${slug}`}>
       <Wrapper>
         <ImageWrapper>
-          <Image alt="" src={imageSrc} />
+          <ImageZoomWrapper>
+            <Image alt="" src={imageSrc} />
+          </ImageZoomWrapper>
           {variant === 'on-sale' && <SaleFlag>Sale</SaleFlag>}
-          {variant === 'new-release' && (
-            <NewFlag>Just released!</NewFlag>
-          )}
+          {variant === 'new-release' && <NewFlag>Just released!</NewFlag>}
         </ImageWrapper>
         <Spacer size={12} />
         <Row>
           <Name>{name}</Name>
           <Price
             style={{
-              '--color':
-                variant === 'on-sale' ? COLORS.gray[700] : undefined,
+              '--color': variant === 'on-sale' ? COLORS.gray[700] : undefined,
               '--text-decoration':
                 variant === 'on-sale' ? 'line-through' : undefined,
             }}
@@ -79,6 +68,24 @@ const ImageWrapper = styled.div`
 
 const Image = styled.img`
   width: 100%;
+  display: block;
+  transform-origin: 50% 75%;
+  transition: transform 450ms, filter 500ms;
+  will-change: transform, filter;
+  filter: brightness(95%);
+
+  @media (hover: hover) and (prefers-reduced-motion: no-preference) {
+    ${Link}:hover &, ${Link}:focus & {
+      filter: brightness(100%);
+      transform: scale(1.1);
+      transition: transform 200ms, filter 300ms;
+    }
+  }
+`;
+
+const ImageZoomWrapper = styled.div`
+  width: 100%;
+  overflow: hidden;
   border-radius: 16px 16px 4px 4px;
 `;
 
@@ -119,6 +126,12 @@ const Flag = styled.div`
   font-weight: ${WEIGHTS.bold};
   color: ${COLORS.white};
   border-radius: 2px;
+
+  transition: transform 450ms ease-out;
+  ${Link}:hover &, ${Link}:focus & {
+    transform: translateX(4px);
+    transition: transform 200ms ease-in-out;
+  }
 `;
 
 const SaleFlag = styled(Flag)`
