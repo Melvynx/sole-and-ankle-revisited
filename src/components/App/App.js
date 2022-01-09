@@ -3,10 +3,13 @@ import styled from 'styled-components/macro';
 import { QUERIES } from '../../constants';
 
 import Header from '../Header';
+import { Playground } from '../Playground';
 import ShoeIndex from '../ShoeIndex';
 
 const App = () => {
   const [sortId, setSortId] = React.useState('newest');
+
+  // return <Playground />;
 
   return (
     <>
